@@ -6,31 +6,34 @@ main{
 	padding: 20px 0;
 	background-color: #eee;
 	border: 1px solid #999;
-	overflow: auto;
 }
 
 
 .name-box{
+	display: inline-block;
 	width: 200px;
 	padding: 20px;
 	line-height: 80px;
 	background-color: #fff;
-	float: left;
 	margin-left: 20px;
+	vertical-align: top;
 }
 .member-box{
+	display: inline-block;
 	background-color: #ddd;
 	width: 120px;
 	padding: 20px 0;
 	background-color: #fff;
-	float: right;
 	margin-right: 20px;
+	vertical-align: top;
 }
 .intro-box{
+	display: inline-block;
 	width: auto;
-	margin-left:280px; 
-	margin-right: 160px;
 	background-color: #fff;
+	margin:  0 20px;
+	max-width: 69.7%;
+    vertical-align: top;
 }
 
 .logo{
