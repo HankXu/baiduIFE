@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>小薇学院任务三-inlineBlock版本</title>
+	<meta  charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="css/reset.css">
+	<link rel="stylesheet" type="text/css" href="css/inlineBlock.css">
+</head>
+<body>
+	<!--
+	由于平时使用inline-block比较多，因此第一眼看到三列布局，我的第一个想法就是用inline-block让三个box并排，当然我也知道这样的实现是极其糟糕（或许有可行的实现方法，只是我并不知道），因为题目要求中间的box自动填满页面剩余的部分，而仅仅使用inline-Block我无法做到。使用inline-block将三个box并排成一行后，首先遇到的问题就是三个元素的对齐问题，由于inline-block默认的对齐方式是基于基线对齐的，因此三个box看上去是高低不平的，不过这个问题只需要设置verticle-align：top即可解决，真正的问题是我无法使中间元素的宽度“不定”，不加以限制，它会将剩余空间占用光，使用max-width限制它，也只能在某个尺寸下达到图示效果，一旦屏幕尺寸有所变动，则一切美好均成过往。
+	-->
+	<main>
+		<div class="name-box">
+			<img class="logo team-logo" src="imgs/logo.jpg"></img>
+			<h1 class="team-name">IT<span class="name-A">A</span>EM</h1>
+		</div>
+		<div class="intro-box">
+			<article class="introduction">
+				<p>ITAEM成立于2011年，是一个以学习为主要目标的团队。初创至今，团队已经走过了近5个春秋，团队规模也从最初的5人扩展到10余人。在这期间，团队磨砺了大部分成员，使得他们在离开学校后都能在自己的技术领域独当一面。</p>
+				<p>在这五年间，团队成员参与、研发过许多来自广东海洋大学内、外各方面领域的计算机和移动端应用。其中包括海大青年便携阅读版面模块、财务报账系统、微信工具开发、LBS交友平台等。正是这些项目，让团队成员积累了开发经验，做到了学以致用。</p>
+				<p><a href="position.html" style="color:red;">前往position实现页面</a></p>
+				<p><a href="float.html" style="color:blue;">前往position实现页面</a></p>
+			</article>
+		</div>
+		<div class="member-box">
+			<ul class="member-list">
+				<li class="member-item first-item"><img class="logo member-photo" src="imgs/touxiang.jpg"></img></li>
+				<li class="member-item"><img class="logo member-photo" src="imgs/touxiang.jpg"></img></li>
+				<li class="member-item"><img class="logo member-photo" src="imgs/touxiang.jpg"></img></li>
+				<li class="member-item"><img class="logo member-photo" src="imgs/touxiang.jpg"></img></li>
+			</ul>
+		</div>
+	</main>
+</body>
+</html>

@@ -1,0 +1,75 @@
+body{
+	padding: 0 20px;
+}
+main{
+	margin-top: 20px;
+	padding: 20px 0;
+	background-color: #eee;
+	border: 1px solid #999;
+	overflow: auto;
+}
+
+
+.name-box{
+	width: 200px;
+	padding: 20px;
+	line-height: 80px;
+	background-color: #fff;
+	float: left;
+	margin-left: 20px;
+}
+.member-box{
+	background-color: #ddd;
+	width: 120px;
+	padding: 20px 0;
+	background-color: #fff;
+	float: right;
+	margin-right: 20px;
+}
+.intro-box{
+	width: auto;
+	margin-left:280px; 
+	margin-right: 160px;
+	background-color: #fff;
+}
+
+.logo{
+	width: 80px;
+	height: 80px;
+}
+.team-logo{
+	border-radius: 50%;
+}
+.team-name{
+	height: 40px;
+	line-height: 40px;
+	display: inline-block;
+	font-size: 28px;
+	vertical-align: middle;
+	color: #516172;
+	margin-left: 12px;
+	padding-left: 8px;
+	border-left: 3px solid #318de4;
+}
+.name-A{
+	color: #318de4;
+}
+.introduction{
+	padding: 20px;
+	font-size: 20px;
+	text-indent: 2em;
+}
+.introduction>p{
+	line-height: 1.5em;
+}
+.member-list{
+	width: 80px;
+	margin: 0 auto;
+
+}
+.member-item{
+	margin-top: 20px;
+}
+.first-item{
+	margin: 0;
+}
