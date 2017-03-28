@@ -274,12 +274,18 @@ main{
 }
 .quotation{
 	display: none;
+	float: right;
 	width: 160px;
 	height: 160px;
 	font-size: 14px;
 	color: #5a5b5b;
 	font-family: "黑体";
 	font-style: italic;
+}
+.quotation:first-letter{
+	font-size: 72px;
+	color: #d45d5c;
+
 }
 .quotation>.quo{
 	height: 20px;
