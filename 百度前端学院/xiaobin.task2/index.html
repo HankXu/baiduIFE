@@ -52,6 +52,14 @@ var aqiData = [
     }
   }
 
+  /**
+  使用Array内置排序方法的实现：
+
+  polluted_city.sort(function(a,b){
+    return a-b;
+  })
+  结果是从小到大排序的
+  */
   //展示数据
   for(let i=0;i<polluted_city.length;i++){
     var locate = polluted_city.length-i-1;  //顺序由小到大，需要找到污染程度高的城市的真实下标
