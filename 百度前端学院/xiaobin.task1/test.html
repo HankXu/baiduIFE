@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>测试DOM操作</title>
+
+
+</head>
+<body>
+	<div id="box1">
+		aaaa<b>bbb</b>
+		<p id="p1">
+			ssssss
+		</p>
+	</div>
+	<button id="btn">获取内容</button>
+
+		<script type="text/javascript">
+		(function(){
+			var btn = document.getElementById("btn");
+			var box1 = document.getElementById("box1");
+			var p1 = document.getElementById("p1");
+
+			btn.onclick = function(){
+				console.log(box1.innerHTML);
+				console.log(box1.innerText);
+
+			}
+		})();
+	</script>
+</body>
+</html>

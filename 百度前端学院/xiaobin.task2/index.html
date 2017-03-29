@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 01</title>
+  </head>
+<body>
+
+  <h3>污染城市列表</h3>
+  <ul id="aqi-list">
+<!--   
+    <li>第一名：福州（样例），10</li>
+      <li>第二名：福州（样例），10</li> -->
+  </ul>
+
+<script type="text/javascript">
+
+var aqiData = [
+  ["北京", 900],
+  ["上海", 50],
+  ["福州", 10],
+  ["广州", 50],
+  ["成都", 90],
+  ["西安", 100]
+];
+  /*
+  在注释下方编写代码
+  遍历读取aqiData中各个城市的数据
+  将空气质量指数大于60的城市显示到aqi-list的列表中
+  */
+(function () {
+  var polluted_city=new Array();
+
+  var display_list = document.getElementById("aqi-list");
+
+  //获取污染城市
+  for(let i=0;i<aqiData.length;i++){
+    if (aqiData[i][1]>=60) {
+      polluted_city.push(aqiData[i]);
+    };
+  }
+
+  //对污染度进行排序，使用了简单的冒泡排序
+  for(let i=0;i<polluted_city.length-1;i++){
+    for(let j=0;j<polluted_city.length;j++){
+      if(polluted_city[i][1]<=polluted_city[i+1][1]){
+        break;
+      }
+      var temp = polluted_city[i];
+      polluted_city[i] = polluted_city[i+1];
+      polluted_city[i+1] = temp;
+    }
+  }
+
+  //展示数据
+  for(let i=0;i<polluted_city.length;i++){
+    var locate = polluted_city.length-i-1;  //顺序由小到大，需要找到污染程度高的城市的真实下标
+    var node_content="第"+(i+1)+"名----"+polluted_city[locate][0]+"：污染程度为："+polluted_city[locate][1];  //拼凑文本内容
+
+    var li_node = document.createElement("LI");  //创建li节点
+    var text_node = document.createTextNode(node_content);  //创建文本节点用于填充li
+ 
+    li_node.appendChild(text_node);  //填充li内容
+    display_list.appendChild(li_node)  //添加列表项
+  }
+
+})();
+
+</script>
+</body>
+</html>
