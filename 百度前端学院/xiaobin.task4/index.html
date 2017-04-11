@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<title>小斌学院任务4</title>
+	<meta charset="UTF-8">
+
+	<style type="text/css">
+		.input-box{
+			width: 50%;
+			margin: 20px auto;
+			text-align: center;
+		}
+		.show-box{
+			width: 90%;
+			margin: 60px auto;
+		}
+		#num-list{
+			list-style: none;
+			position: relative;
+		}
+		li{
+			display: inline-block;
+			width: 40px;
+			height: 40px;
+			text-align: center;
+			line-height: 40px;
+			vertical-align: middle;
+			background-color: #888;
+			color: #fff;
+			margin-right: 5px;
+		}
+		.leave{
+			transition:opacity 1s;
+			opacity: 0;
+		}
+		.newItem{
+			margin-top: -40px;
+		}
+		.itemIn{			
+			transition: margin-top 1s ease-in;
+			margin-top: 0px;
+		}
+	</style>
+</head>
+<body>
+	<div class="input-box"><input type="text" id="Num"></div>
+	<div class="input-box btn-box">
+		<button id="left-in" onclick="Operate('in','left')">左侧入</button>
+		<button id="right-in" onclick="Operate('in','right')">右侧入</button>
+		<button id="left-out" onclick="Operate('out','left')">左侧出</button>
+		<button id="right-out" onclick="Operate('out','right')">右侧出</button>
+	</div>
+	<div class="show-box">
+		<ul id="num-list"></ul>
+	</div>
+
+	<script type="text/javascript">
+
+		/**获取列表的函数**/
+	    function getList(){
+	    	var numListNode = document.getElementById("num-list");
+	    	var numList = numListNode.getElementsByTagName("LI");
+
+	    	return numList;
+	    }
+
+	    /**获取表单输入的数字**/
+	    function getInput(){
+	    	var input = document.getElementById("Num");
+
+	    	return input.value;
+	    }
+
+	    /**清除输入框的内容**/
+	    function clearInput(){
+	    	var input = document.getElementById("Num");
+
+	    	input.value="";
+	    }
+
+
+	    /**渲染函数**/
+	    function render(renderObject){
+	    	var numUl = document.getElementById("num-list");
+	    	var numList = getList();
+
+	    	if (renderObject.renderType=='In') {
+	    		var liNode = document.createElement("LI");
+		    	var liTextNode = document.createTextNode(renderObject.renderNum);
+		    	liNode.appendChild(liTextNode);
+		   		liNode.setAttribute("class","newItem num-item");//设置标签的类属性
+
+		    	switch(renderObject.renderDirection){
+		    		case 'left':
+		    		    numUl.insertBefore(liNode,numList[0]);  //在原有的第一个节点前插入新节点
+		    		    setTimeout(function(){liNode.setAttribute("class","itemIn num-item")},0); //添加transition效果
+		    		    break;
+		    		case "right":
+		    			numUl.appendChild(liNode);
+		    			setTimeout(function(){liNode.setAttribute("class","itemIn num-item")},0);
+
+	    			default:
+		    		    break;
+
+		    	}
+	    	}else if (renderObject.renderType=='Out') {
+	    		if(numList.length>0){
+		    		switch(renderObject.renderDirection){
+		    			case 'left':
+		    				alert("您将从左侧移出："+numList[0].innerHTML);
+		    				numList[0].setAttribute("class","leave");
+		    				setTimeout(function(){numUl.removeChild(numList[0])},1500);
+
+		    				break;
+
+		    			case 'right':
+		    				alert("您将从右侧移出："+numList[numList.length-1].innerHTML);
+		    				numList[numList.length-1].setAttribute("class","leave");
+		    				setTimeout(function(){numUl.removeChild(numList[numList.length-1])},1500);
+		    				break;
+
+		    			default:
+		    				break;
+		    		}
+	    		}else{
+	    			alert("队列里已经没东西了。你瞎么");
+	    		}
+	    	};
+
+	    	bindDelete();	
+	    }
+	    
+
+	    /**绑定点击删除事件**/
+	    function bindDelete(){
+	    	var numList = getList();
+	    	for (var i = 0; i <numList.length; ++i) {
+	    		(function(){
+	    			numList[i].onclick = function(){
+	    				var numUl = this.parentNode;
+	    				// numUl.removeChild(this);
+	    				this.setAttribute("class","leave"); //添加transition效果
+	    				_this = this;
+	    				setTimeout(function(){numUl.removeChild(_this)},1500);
+	    			}
+	    		})();
+	    	};
+	    }
+
+
+
+	    /**验证输入的数据类型**/
+	    function validate(data){
+	    	if(data==null||data==""){
+	    		return true;
+	    	}
+	    	return isNaN(Number(data));
+	    }
+
+	    //进入操作在此函数中完成
+	    function Operate(type,direction){
+	    	var numList = getList();
+	    	var data = new Array();
+	    	var renderOb = new Object();
+
+	    	//获取数字数组
+	    	for (var i = 0; i < numList.length; i++) {
+	    		data.push(numList[i].innerHTML);
+	    	};
+
+
+	    	if ('in'===type) {
+	    		var input = getInput();
+
+		    	//验证是否为数字
+		    	if(validate(input)){
+		    		clearInput();
+		    		alert("不要调皮，请输入数字");
+		    		return false;
+		    	}
+
+		    	switch(direction){
+		    		case "left":
+		    		    data.unshift(input);
+		    		    
+		    		    renderOb.renderType = "In";
+		    		    renderOb.renderDirection = "left"
+		    		    renderOb.renderNum = data[0];
+		    		    render(renderOb);
+		    		    break;
+
+		    		case "right":
+		    			data.push(input);
+		    			
+		    			renderOb.renderType = "In";
+		    			renderOb.renderDirection = "right"
+		    			renderOb.renderNum = data[data.length-1];
+		    			render(renderOb);
+		    			break;
+
+		    		default:
+		    		    break;
+		    	}
+
+	    	}
+	    	else if ('out'===type) {
+	    		switch(direction){
+	    			case "left":
+	    				renderOb.renderType = "Out";
+	    				renderOb.renderDirection = "left";
+	    				renderOb.renderNum = undefined;
+	    				render(renderOb);
+	    				break;
+
+	    			case "right":
+	    				renderOb.renderType = "Out";
+	    				renderOb.renderDirection = "right";
+	    				renderOb.renderNum = undefined;
+	    				render(renderOb);
+	    				break;
+
+	    			default:
+	    				break;
+	    		}
+	    	};
+
+	    }
+
+	    function init(){
+	    	bindDelete();
+	    }
+
+	    init();
+
+	</script>
+</body>
+</html>
